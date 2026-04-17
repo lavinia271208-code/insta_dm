@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.farorite_border, color: Colors.white),
+              icon: const Icon(Icons.favorite_border, color: Colors.white),
               //aq
       body: Center(
        
