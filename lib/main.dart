@@ -32,11 +32,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
+  int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
-      
       _counter++;
     });
   }
@@ -52,9 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween, // Distribui os itens p/ Esquerda, Centro e Direita
           children: [
             IconButton(
-              icon: const Icon(Icons.add.box.outlined, color: Colors.white), //ícone de +
+              icon: const Icon(Icons.add_box_outlined, color: Colors.white),
+              onPressed: () {}, // Adicionei o onPressed que faltava
             ),
-            const Text( 
+            const Text(
               'Instagram',
               style: TextStyle(
                 color: Colors.white,
@@ -64,12 +64,16 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             IconButton(
               icon: const Icon(Icons.favorite_border, color: Colors.white),
-              //aq
+              onPressed: () {},
+            ),
+          ], // Fecha o children: [
+        ), // Fecha a Row(
+      ), // Fecha o AppBar(
       body: Center(
        
         child: Column(
-          
-          mainAxisAlignment: .center,
+
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('You have pushed the button this many times:'),
             Text(
