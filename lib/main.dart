@@ -70,6 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 return const StoryItem();
               },
             ),
-          ),
+          );
           // FEED
-          const 
+          const Expanded(
+            child: Center(
+              child: Text(
