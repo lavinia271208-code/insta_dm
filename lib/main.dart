@@ -10,55 +10,43 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false, // Remove a faixa de debug
+      title: 'Instagram',
       theme: ThemeData(
-        
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        // Correção: Adicionado ColorScheme antes do .fromSeed
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
- 
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
+      backgroundColor: Colors.black, // Fundo do app todo preto
       appBar: AppBar(
-        backgroundColor: Colors.black, //fundo preto
-        
+        backgroundColor: Colors.black,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween, // Distribui os itens p/ Esquerda, Centro e Direita
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
               icon: const Icon(Icons.add_box_outlined, color: Colors.white),
-              onPressed: () {}, // Adicionei o onPressed que faltava
+              onPressed: () {},
             ),
             const Text(
               'Instagram',
               style: TextStyle(
                 color: Colors.white,
-                fontFamily: 'Billabong',
                 fontSize: 28,
               ),
             ),
@@ -66,28 +54,22 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.favorite_border, color: Colors.white),
               onPressed: () {},
             ),
-          ], // Fecha o children: [
-        ), // Fecha a Row(
-      ), // Fecha o AppBar(
-      body: Center(
-       
-        child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-}
+      // TUDO que for conteúdo da tela deve estar dentro do body
+      body: Column(
+        children: [
+          // SEÇÃO DE STORIES
+          SizedBox(
+            height: 120,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return const StoryItem();
+              },
+            ),
+          ),
+          // FEED
+          const 
