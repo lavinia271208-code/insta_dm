@@ -3,13 +3,31 @@ import 'package:flutter/material.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-  // ---------------- HEADER ----------------
-  Widget _buildHeader() {
+  void _showAlert(BuildContext context, String title, String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
 
-        // FOTO + NÚMEROS
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           child: Row(
@@ -28,27 +46,21 @@ class ProfileScreen extends StatelessWidget {
                   children: const [
                     Column(
                       children: [
-                        Text('3',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16)),
+                        Text('12', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                         SizedBox(height: 4),
                         Text('Posts'),
                       ],
                     ),
                     Column(
                       children: [
-                        Text('340',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16)),
+                        Text('340', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                         SizedBox(height: 4),
                         Text('Seguidores'),
                       ],
                     ),
                     Column(
                       children: [
-                        Text('180',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16)),
+                        Text('180', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                         SizedBox(height: 4),
                         Text('Seguindo'),
                       ],
@@ -60,7 +72,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
 
-        // USERNAME + BIO
+
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 12),
           child: Column(
@@ -68,33 +80,35 @@ class ProfileScreen extends StatelessWidget {
             children: [
               Text(
                 'user.instagram',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               ),
               SizedBox(height: 4),
-              Text(
-                'Bio',
-                style: TextStyle(fontSize: 13),
-              ),
+              Text('Sua bio aqui ✨', style: TextStyle(fontSize: 13)),
             ],
           ),
         ),
 
         const SizedBox(height: 10),
 
-        // BOTÃO EDITAR PERFIL
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Container(
-            height: 35,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(6),
+          child: GestureDetector(
+            onTap: () {
+              _showAlert(
+                context,
+                "Editar Perfil",
+                "Aqui você poderá editar seu perfil.",
+              );
+            },
+            child: Container(
+              height: 35,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: const Text('Editar perfil'),
             ),
-            child: const Text('Editar perfil'),
           ),
         ),
 
@@ -105,10 +119,9 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  // ---------------- GRID ----------------
   Widget _buildGrid() {
     return GridView.builder(
-      itemCount: 3,
+      itemCount: 12,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -125,17 +138,22 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  // ---------------- BUILD ----------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
 
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        elevation: 0,
+        title: const Text('Instagram'),
+        centerTitle: true,
+      ),
 
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _buildHeader(),
+            _buildHeader(context),
             _buildGrid(),
           ],
         ),
